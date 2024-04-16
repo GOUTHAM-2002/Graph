@@ -23,6 +23,28 @@ public:
             cout<<endl;
         }
     }
+    void DfsUtil(int start){
+        vector<int> stack;
+        vector<int> visited(V,0);
+        stack.push_back(start);
+        Dfs(stack,visited);
+        }
+
+    void Dfs(vector<int> stack,vector<int> visited){
+        while(!stack.empty()){
+            cout<<stack.back()<<" ";
+            int popped = stack.back();
+            visited[popped]=1;
+            stack.erase(stack.end());
+            for(auto it : adj[popped]){
+                if(visited[it]!=1){
+                    stack.push_back(it);
+                    Dfs(stack,visited);
+
+                }
+            }
+        }
+    }
     void Bfs(int a){
         vector<int> visited={0,0,0,0};
         vector<int> queue;
@@ -56,6 +78,6 @@ int main() {
     g.addEdge(2, 3);
     g.addEdge(3, 3);
     g.display();
-    g.Bfs(1);
+    g.DfsUtil(1);
     return 0;
 }
