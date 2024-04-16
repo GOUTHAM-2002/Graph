@@ -23,6 +23,26 @@ public:
             cout<<endl;
         }
     }
+    void Bfs(int a){
+        vector<int> visited={0,0,0,0};
+        vector<int> queue;
+        int start = adj[0].front();
+        queue.insert(queue.begin(),start);
+        int popped;
+        while(!queue.empty()){
+            popped = queue[0];
+            queue.erase(queue.begin());
+            for(auto it : adj[popped]){
+                if (it==a)
+                    cout<<"Key found"<<" "<<a<<endl;
+                if(visited[it]==0)
+                    queue.push_back(it);
+                visited[it]=1;
+            }
+        }
+
+
+    }
 
 
 };
@@ -36,5 +56,6 @@ int main() {
     g.addEdge(2, 3);
     g.addEdge(3, 3);
     g.display();
+    g.Bfs(1);
     return 0;
 }
